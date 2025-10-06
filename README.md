@@ -1,4 +1,4 @@
-# 🎨 [Your Name]'s Portfolio Website
+# 🎨 Deepanshu Shukla's Portfolio Website
 
 Welcome to my personal portfolio — a front-end-only project where creativity meets code. Built with nothing but **HTML**, **CSS**, and **JavaScript**, this site is a reflection of my skills, projects, and passion for web development.
 
