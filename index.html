@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Deepanshu Shukla | Portfolio</title>
+
+  <style>
+    /* ======= Global ======= */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: #05050a;
+      color: #e0e0e0;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    a { color: #00eaff; text-decoration: none; }
+    a:hover { color: #7df9ff; }
+
+    /* ======= Canvas (Circuit Animation) ======= */
+    #bgCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      background: radial-gradient(circle at center, #0c0c15, #000010);
+    }
+
+    /* ======= Navbar ======= */
+    nav {
+      position: fixed;
+      width: 100%;
+      background: rgba(10, 10, 20, 0.85);
+      box-shadow: 0 0 10px #00eaff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 50px;
+      z-index: 10;
+      backdrop-filter: blur(10px);
+    }
+
+    .logo {
+      color: #00eaff;
+      font-size: 1.6rem;
+      font-weight: 600;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 25px;
+    }
+
+    nav ul li a {
+      font-weight: 500;
+      color: #e0e0e0;
+      transition: 0.3s;
+    }
+
+    nav ul li a:hover {
+      color: #00ffff;
+      text-shadow: 0 0 10px #00ffff;
+    }
+
+    /* ======= Sections ======= */
+    section {
+      padding: 100px 10%;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    h2 {
+      font-size: 2rem;
+      color: #00eaff;
+      text-shadow: 0 0 10px #00eaff;
+      margin-bottom: 25px;
+    }
+
+    /* ======= Home ======= */
+    #home {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .profile-photo {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      border: 4px solid #00eaff;
+      object-fit: cover;
+      box-shadow: 0 0 20px #00ffff88;
+      margin-bottom: 20px;
+    }
+
+    #home h1 {
+      font-size: 3rem;
+      color: #00eaff;
+      text-shadow: 0 0 20px #00ffff;
+    }
+
+    #home h2 {
+      font-size: 1.5rem;
+      margin-top: 10px;
+      color: #aaa;
+    }
+
+    .typing {
+      color: #00ffff;
+      border-right: 2px solid #00ffff;
+      animation: blink 1s infinite;
+    }
+
+    @keyframes blink {
+      50% { border-color: transparent; }
+    }
+
+    .scroll-down {
+      margin-top: 40px;
+      color: #00eaff;
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    /* ======= About ======= */
+    #about p {
+      max-width: 800px;
+      margin: auto;
+      line-height: 1.8;
+      color: #ccc;
+    }
+
+    /* ======= Skills ======= */
+    #skills .skill {
+      margin: 15px auto;
+      max-width: 600px;
+      text-align: left;
+    }
+
+    .skill-title {
+      margin-bottom: 5px;
+      font-weight: 600;
+    }
+
+    .bar {
+      width: 100%;
+      background: #101020;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .bar span {
+      display: block;
+      height: 10px;
+      background: linear-gradient(90deg, #00eaff, #00ffff);
+      border-radius: 10px;
+      box-shadow: 0 0 10px #00ffff;
+    }
+
+    /* ======= Projects ======= */
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
+    }
+
+    .project {
+      background: rgba(20, 20, 40, 0.9);
+      border-radius: 15px;
+      padding: 20px;
+      box-shadow: 0 0 15px rgba(0, 255, 255, 0.15);
+      transition: 0.3s;
+    }
+
+    .project:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 25px rgba(0, 255, 255, 0.4);
+    }
+
+    .project h3 {
+      color: #00ffff;
+      margin-bottom: 10px;
+    }
+
+    .project p {
+      color: #ccc;
+      margin-bottom: 10px;
+    }
+
+    /* ======= Contact ======= */
+    #contact p { color: #ccc; margin: 10px 0; }
+    .socials a { margin: 0 10px; font-size: 1.2rem; }
+
+    /* ======= Footer ======= */
+    footer {
+      background: #080810;
+      padding: 20px;
+      text-align: center;
+      color: #888;
+      border-top: 1px solid #00eaff;
+    }
+
+    /* ======= Responsive ======= */
+    @media(max-width: 768px) {
+      nav { padding: 15px 25px; }
+      #home h1 { font-size: 2.2rem; }
+      #home h2 { font-size: 1.1rem; }
+      section { padding: 80px 5%; }
+    }
+  </style>
+</head>
+
+<body>
+  <canvas id="bgCanvas"></canvas>
+
+  <!-- ======= Navbar ======= -->
+  <nav>
+    <div class="logo">Deepanshu</div>
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- ======= Home ======= -->
+  <section id="home">
+    <img src="myimg.png" alt="Deepanshu Photo" class="profile-photo" />
+    <h1>Deepanshu Shukla</h1>
+    <h2>I’m a <span class="typing"></span></h2>
+    <div class="scroll-down">⬇ Scroll to explore ⬇</div>
+  </section>
+
+  <!-- ======= About ======= -->
+  <section id="about">
+    <h2>About Me</h2>
+    <p>
+      I'm a passionate Computer Science student at <br><b>United Institute of Technology, Prayagraj</b>
+      (B.Tech in CSE - AIML, GPA 8.45/10).  <br>
+      I love building web apps and solving algorithmic challenges.  
+      I’ve trained in <b>Generative AI (IIIT Allahabad)</b> and specialize in <b>C++, JavaScript, React, Node.js</b>.
+    </p>
+  </section>
+
+  <!-- ======= Skills ======= -->
+  <section id="skills">
+    <h2>Skills</h2>
+    <div class="skill">
+      <div class="skill-title">C / C++ / Python</div>
+      <div class="bar"><span style="width: 90%"></span></div>
+    </div>
+    <div class="skill">
+      <div class="skill-title">JavaScript / React / Node.js</div>
+      <div class="bar"><span style="width: 85%"></span></div>
+    </div>
+    <div class="skill">
+      <div class="skill-title">HTML / CSS / Tailwind</div>
+      <div class="bar"><span style="width: 95%"></span></div>
+    </div>
+    <div class="skill">
+      <div class="skill-title">MongoDB / MySQL</div>
+      <div class="bar"><span style="width: 80%"></span></div>
+    </div>
+  </section>
+
+  <!-- ======= Projects ======= -->
+  <section id="projects">
+    <h2>Projects</h2>
+    <div class="projects">
+      <div class="project">
+        <h3>CodeConverter</h3>
+        <p>AI-powered web app for converting code between Java, C++, and Python using OpenAI API.</p>
+        <p><b>Tech:</b> HTML, CSS, JS, Node.js, Express.js</p>
+        <a href="https://github.com/Deepanshu49/CodeConverter">🔗 GitHub</a><br>
+        <a href="https://codeconverter-j8h5.onrender.com/">🌐 Site Link</a>
+      </div>
+      <div class="project">
+        <h3>Attend-OR-Not</h3>
+        <p>Attendance prediction tool that helps students plan attendance effectively.</p>
+        <p><b>Tech:</b> HTML, CSS, JS</p>
+        <a href="https://github.com/Deepanshu49/attendance-calculator">🔗 GitHub</a><br>
+        <a href="https://deepanshu49.github.io/attendance-calculator/">🌐 Site Link</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======= Contact ======= -->
+  <section id="contact">
+    <h2>Contact Me</h2>
+    <p><b>Mobile:</b> +91 7887236267</p>
+    <p><b>Email:</b> <a href="mailto:codexdeepanshu@gmail.com">codexdeepanshu@gmail.com</a></p>
+    <p><b>Resume:</b> <a href="https://drive.google.com/file/d/1rIMq23okmN1drqXk7hGkwiWZeVb5xTab/view?usp=drivesdk">CLick me!!</a></p>
+    <div class="socials">🌐 <a href="https://www.linkedin.com/in/deepanshu-shukla-codex">LinkedIn</a> | <a href="https://www.github.com/Deepanshu49">GitHub </a>| <a href="https://www.leetcode.com/u/DipShu">Leetcode</a></div>
+  </section>
+
+  <!-- ======= Footer ======= -->
+  <footer>Let's Build with ❤️ by Deepanshu Shukla.</footer>
+
+  <!-- ======= JavaScript ======= -->
+  <script>
+    /* ======= Typing Effect ======= */
+    const textArray = ["Web Developer", "AI Enthusiast", "Competitive Programmer", "Tech Explorer"];
+    let index = 0, charIndex = 0;
+    const typingSpan = document.querySelector(".typing");
+
+    function type() {
+      if (charIndex < textArray[index].length) {
+        typingSpan.textContent += textArray[index].charAt(charIndex);
+        charIndex++;
+        setTimeout(type, 120);
+      } else {
+        setTimeout(erase, 1000);
+      }
+    }
+
+    function erase() {
+      if (charIndex > 0) {
+        typingSpan.textContent = textArray[index].substring(0, charIndex - 1);
+        charIndex--;
+        setTimeout(erase, 60);
+      } else {
+        index = (index + 1) % textArray.length;
+        setTimeout(type, 300);
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", () => setTimeout(type, 300));
+
+    /* ======= Interactive Circuit Animation ======= */
+    const canvas = document.getElementById('bgCanvas');
+    const ctx = canvas.getContext('2d');
+    let width, height, nodes;
+    let mouse = { x: null, y: null, radius: 150 };
+
+    function resize() {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+      nodes = [];
+      for (let i = 0; i < 100; i++) {
+        nodes.push({
+          x: Math.random() * width,
+          y: Math.random() * height,
+          dx: (Math.random() - 0.5) * 0.5,
+          dy: (Math.random() - 0.5) * 0.5
+        });
+      }
+    }
+
+    window.addEventListener('mousemove', (e) => {
+      mouse.x = e.x;
+      mouse.y = e.y;
+    });
+
+    function draw() {
+      ctx.clearRect(0, 0, width, height);
+      ctx.fillStyle = '#00eaff';
+      nodes.forEach(n => {
+        n.x += n.dx;
+        n.y += n.dy;
+        if (n.x < 0 || n.x > width) n.dx *= -1;
+        if (n.y < 0 || n.y > height) n.dy *= -1;
+
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, 1.2, 0, Math.PI * 2);
+        ctx.fill();
+      });
+
+      for (let i = 0; i < nodes.length; i++) {
+        for (let j = i + 1; j < nodes.length; j++) {
+          let dx = nodes[i].x - nodes[j].x;
+          let dy = nodes[i].y - nodes[j].y;
+          let dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 100) {
+            let mouseDx = nodes[i].x - mouse.x;
+            let mouseDy = nodes[i].y - mouse.y;
+            let mouseDist = Math.sqrt(mouseDx * mouseDx + mouseDy * mouseDy);
+            let glow = 1 - Math.min(mouseDist / mouse.radius, 1);
+            ctx.strokeStyle = `rgba(0,255,255,${(1 - dist / 100) * (0.3 + glow)})`;
+            ctx.lineWidth = 0.6 + glow * 1.4;
+            ctx.beginPath();
+            ctx.moveTo(nodes[i].x, nodes[i].y);
+            ctx.lineTo(nodes[j].x, nodes[j].y);
+            ctx.stroke();
+          }
+        }
+      }
+      requestAnimationFrame(draw);
+    }
+
+    window.addEventListener('resize', resize);
+    resize();
+    draw();
+  </script>
+</body>
+</html>
